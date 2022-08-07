@@ -1,5 +1,6 @@
 package com.cbcode.projectmentoria.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -9,14 +10,15 @@ import javax.persistence.*;
 @SequenceGenerator(name = "seq_access", sequenceName = "seq_access", allocationSize = 1, initialValue = 1)
 public class Access implements GrantedAuthority {
 
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_access")
-    private static final long serialVersionUID = 1L;
-
     private Long id;
 
-    private String description;
+    @Column(nullable = false)
+    private String description; // Access ex: ROLE_ADMIN or ROLE_MANAGER.
 
+    @JsonIgnore
     @Override
     public String getAuthority() {
         return this.description;
@@ -39,6 +41,13 @@ public class Access implements GrantedAuthority {
     }
 
     @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -54,13 +63,4 @@ public class Access implements GrantedAuthority {
             return false;
         return true;
     }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
 }
