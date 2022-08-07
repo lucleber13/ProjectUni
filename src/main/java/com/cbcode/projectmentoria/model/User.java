@@ -31,6 +31,32 @@ public class User implements UserDetails {
     @Temporal(TemporalType.DATE)
     private Date actualDate;
 
+    @ManyToOne(targetEntity = Car.class)
+    @JoinColumn(name = "car_stock_id", nullable = false,
+    foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "car_stock_fk"))
+    private Car carStoke;
+
+    public Car getCarStoke() {
+        return carStoke;
+    }
+
+    public void setCarStoke(Car carStoke) {
+        this.carStoke = carStoke;
+    }
+
+    @ManyToOne(targetEntity = Car.class)
+    @JoinColumn(name = "car_sold_id", nullable = false,
+            foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "car_sold_id_fk"))
+    private Car carSold;
+
+    public Car getCarSold() {
+        return carSold;
+    }
+
+    public void setCarSold(Car carSold) {
+        this.carSold = carSold;
+    }
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_access",
         uniqueConstraints = @UniqueConstraint(columnNames = {"users_id", "access_id"},
@@ -40,8 +66,8 @@ public class User implements UserDetails {
             unique = false, foreignKey = @ForeignKey(name = "users_fk", value = ConstraintMode.CONSTRAINT)),
 
     inverseJoinColumns = @JoinColumn(name = "access_id",
-                                            unique = false, referencedColumnName = "id", table = "access",
-                                            foreignKey = @ForeignKey(name = "access_fk", value = ConstraintMode.CONSTRAINT)))
+            unique = false, referencedColumnName = "id", table = "access",
+            foreignKey = @ForeignKey(name = "access_fk", value = ConstraintMode.CONSTRAINT)))
     private List<Access> access;
 
     public Long getId() {

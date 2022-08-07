@@ -17,6 +17,8 @@ public class CarSold extends Car {
 
     private boolean interiorWashing;
 
+    private String vehicleCode;
+
     private String addComments;
 
     public boolean isBodyProtection() {
@@ -41,6 +43,14 @@ public class CarSold extends Car {
 
     public void setInteriorWashing(boolean interiorWashing) {
         this.interiorWashing = interiorWashing;
+    }
+
+    public String getVehicleCode() {
+        return vehicleCode;
+    }
+
+    public void setVehicleCode(String vehicleCode) {
+        this.vehicleCode = vehicleCode;
     }
 
     public String getAddComments() {
