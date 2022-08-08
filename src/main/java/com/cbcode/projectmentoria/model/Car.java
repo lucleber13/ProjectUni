@@ -32,13 +32,11 @@ public abstract class Car implements Serializable {
     @NotNull(message = "Register number must be entered!")
     @Column(nullable = false)
     private int keysNumber;
-
     @OneToMany(mappedBy = "carStock", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Sales> sales = new ArrayList<Sales>();
 
-
     @ManyToOne(targetEntity = Car.class)
-    @JoinColumn(name = "car_sold", nullable = true,
+    @JoinColumn(name = "car_sold", nullable = false,
     foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "car_sold_id_fk"))
     private Car carSold;
 
