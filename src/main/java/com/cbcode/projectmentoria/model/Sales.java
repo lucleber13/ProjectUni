@@ -26,13 +26,13 @@ public class Sales implements Serializable {
 
     @JsonIgnore
     @ManyToOne(targetEntity = Car.class)
-    @JoinColumn(name = "car_stock", nullable = false,
+    @JoinColumn(name = "car_stock",
             foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "car_stock_id_fk"))
     private Car carStock;
 
     @JsonIgnore
     @ManyToOne(targetEntity = Car.class)
-    @JoinColumn(name = "car_sold", nullable = false,
+    @JoinColumn(name = "car_sold",
             foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "car_sold_id_fk"))
     private Car carSold;
 

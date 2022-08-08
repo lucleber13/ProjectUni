@@ -10,12 +10,12 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@SequenceGenerator(name = "seq_person", sequenceName = "seq_person", allocationSize = 1, initialValue = 1)
+@SequenceGenerator(name = "seq_car", sequenceName = "seq_car", allocationSize = 1, initialValue = 1)
 public abstract class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_person")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_car")
     private Long id;
     @NotBlank(message = "Model must be entered!")
     @NotNull(message = "Model must be entered!")
@@ -33,28 +33,43 @@ public abstract class Car implements Serializable {
     @Column(nullable = false)
     private int keysNumber;
     @OneToMany(mappedBy = "carStock", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Sales> sales = new ArrayList<Sales>();
+    private List<Sales> salesStock = new ArrayList<Sales>();
 
-    @ManyToOne(targetEntity = Car.class)
-    @JoinColumn(name = "car_sold", nullable = false,
-    foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "car_sold_id_fk"))
-    private Car carSold;
-
-    public Car getCarSold() {
-        return carSold;
+    public List<Sales> getSalesStorck() {
+        return salesStock;
     }
 
-    public void setCarSold(Car carSold) {
-        this.carSold = carSold;
+    public void setSalesStorck(List<Sales> salesStorck) {
+        this.salesStock = salesStorck;
     }
 
-    public List<Sales> getSales() {
-        return sales;
+    @OneToMany(mappedBy = "carSold", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Sales> salesSold = new ArrayList<Sales>();
+
+    public List<Sales> getSalesSold() {
+        return salesSold;
     }
 
-    public void setSales(List<Sales> sales) {
-        this.sales = sales;
+    public void setSalesSold(List<Sales> salesSold) {
+        this.salesSold = salesSold;
     }
+
+    //    @ManyToOne(targetEntity = Car.class)
+//    @JoinColumn(name = "car_sold", nullable = false,
+//    foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "car_sold_id_fk"))
+//    private Car carSold;
+//    public Car getCarSold() {
+//        return carSold;
+//    }
+//    public void setCarSold(Car carSold) {
+//        this.carSold = carSold;
+//    }
+//    public List<Sales> getSales() {
+//        return sales;
+//    }
+//    public void setSales(List<Sales> sales) {
+//        this.sales = sales;
+//    }
 
     public Long getId() {
         return id;
