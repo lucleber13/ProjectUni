@@ -35,12 +35,12 @@ public abstract class Car implements Serializable {
     @OneToMany(mappedBy = "carStock", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Sales> salesStock = new ArrayList<Sales>();
 
-    public List<Sales> getSalesStorck() {
+    public List<Sales> getSalesStock() {
         return salesStock;
     }
 
-    public void setSalesStorck(List<Sales> salesStorck) {
-        this.salesStock = salesStorck;
+    public void setSalesStock(List<Sales> salesStock) {
+        this.salesStock = salesStock;
     }
 
     @OneToMany(mappedBy = "carSold", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -54,22 +54,6 @@ public abstract class Car implements Serializable {
         this.salesSold = salesSold;
     }
 
-    //    @ManyToOne(targetEntity = Car.class)
-//    @JoinColumn(name = "car_sold", nullable = false,
-//    foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "car_sold_id_fk"))
-//    private Car carSold;
-//    public Car getCarSold() {
-//        return carSold;
-//    }
-//    public void setCarSold(Car carSold) {
-//        this.carSold = carSold;
-//    }
-//    public List<Sales> getSales() {
-//        return sales;
-//    }
-//    public void setSales(List<Sales> sales) {
-//        this.sales = sales;
-//    }
 
     public Long getId() {
         return id;

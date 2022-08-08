@@ -21,15 +21,15 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_users")
     private Long id;
 
+    @Column(nullable = false)
+    private String name;
+
     @Column(nullable = false, unique = true)
     private String login;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date actualDate;
 
     @ManyToOne(targetEntity = Car.class)
     @JoinColumn(name = "car_stock_id", nullable = false,
@@ -70,6 +70,14 @@ public class User implements UserDetails {
             foreignKey = @ForeignKey(name = "access_fk", value = ConstraintMode.CONSTRAINT)))
     private List<Access> access;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
@@ -88,14 +96,6 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getActualDate() {
-        return actualDate;
-    }
-
-    public void setActualDate(Date actualDate) {
-        this.actualDate = actualDate;
     }
 
     public List<Access> getAccess() {
